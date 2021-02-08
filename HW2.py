@@ -36,5 +36,22 @@ def DegreeOutput(g):
 	print("Min Degree: ", minDegree)
 	print("Average Degree: ", degreeSum/len(g.nodes))
 	
-		
+	
+	
+def CharacteristicPathLength(g):
+	print("\n=============== #2 ===============")
+	print("Average Shortest Path Length: ", nx.average_shortest_path_length(g))
+	
+def Diameter(g):
+	print("\n=============== #3 ===============")
+	print("Diameter: ", nx.diameter(g))
+	
+def CenterAndPeripheral(g):
+	print("\n=============== #4 ===============")
+	print("Center Nodes: ", nx.center(g))
+	print("Peripheral Nodes: ", nx.periphery(g))
+	
 DegreeOutput(DolphinGraph)
+CharacteristicPathLength(DolphinGraph)
+Diameter(DolphinGraph)
+CenterAndPeripheral(DolphinGraph)
