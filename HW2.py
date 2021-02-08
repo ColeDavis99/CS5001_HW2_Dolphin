@@ -53,24 +53,26 @@ def CenterAndPeripheral(g):
 	
 def EffectiveEccentricity(g):
 	print("\n=============== #5 ===============")
-	#What is the shortest path length that reaches 90% of all dolphins, from any starting node?
+	#What is the shortest path length that reaches 90% of all dolphins, from the optimal starting node?
 	totalDolphins = len(list(g.nodes))
-	dolphinsToReach = math.ceil(totalDolphins * 0.9)
-	dolphinsToIgnore = totalDolphins - dolphinsToReach
+	dolphinsToKeep = math.floor(totalDolphins * 0.9)
+	dolphinsToIgnore = math.ceil(totalDolphins * 0.1)
 
 	spaths = dict(nx.all_pairs_shortest_path_length(g))
-	
-	#Get the longest shortest path for each node
+
 	longestPaths = list()
+	ctr = 0
 	
+	#Loop through the (ascending) shortest paths to all other dolphins for each dolphin. Append the length of the path it took to reach the 55th dolphin for each dolphin, and then print the minimum value from that list. That number will represent the shortest path possible to reach 90% of all other dolphins (not from any starting point though, the optimal starting point). Using the max function instead of the min function would get you the length it would take to reach 90% of all other dolphins from ANY starting dolphin.
 	for node1 in spaths:
+		ctr = 0
 		for node2 in spaths[node1]:
-			print(spaths[node1][node2])
+			ctr = ctr+1
+			if(ctr == dolphinsToKeep):
+				longestPaths.append(spaths[node1][node2])
+				break
 	
-	
-	
-	#Sort the longest shortest path for each node by descending order
-	#Remove the top "dolphinsToIgnore" number of values 
+	print("Effective Eccenctricity: ", min(longestPaths))
 	
 #Driver
 DegreeOutput(DolphinGraph)
