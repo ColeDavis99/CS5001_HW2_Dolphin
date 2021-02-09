@@ -50,33 +50,33 @@ def CenterAndPeripheral(g):
 	print("\n=============== #4 ===============")
 	print("Center Nodes: ", nx.center(g))
 	print("Peripheral Nodes: ", nx.periphery(g))
+
 	
+#I think you can calculate it if you take the entries in the apsp matrix (minus the ones along the diagonal), sort them, and take the average of the top 90%. Try that on the example we did in class.
 def EffectiveEccentricity(g):
 	print("\n=============== #5 ===============")
-	#What is the shortest path length that reaches 90% of all dolphins?
 	totalDolphins = len(list(g.nodes))
 	dolphinsToKeep = math.floor(totalDolphins * 0.9)
 
 	#Calculate every shortest path for every dolphin
 	spaths = dict(nx.all_pairs_shortest_path_length(g))
 
-	#Will hold the length of the longest path it takes for each dolphin to reach 90% of the others
-	#To get the effective eccentricity, we'll take the min() from this list and that's the answer.
-	longestPaths = list()
+	paths = list()
 	ctr = 0
 	
-	#Loop through the (ascending) shortest paths to all other dolphins for each dolphin. Append the length of the path it took to reach the 55th dolphin for each dolphin, and then print the minimum value from that list. That number will represent the shortest path possible to reach 90% of all other dolphins (not from any starting point though, the optimal starting point).
 	for node1 in spaths:
-		ctr = 0
 		for node2 in spaths[node1]:
-			ctr = ctr+1
-			if(ctr == dolphinsToKeep):
-				longestPaths.append(spaths[node1][node2])
-				break
-	
+			if(node1 != node2):
+				paths.append(spaths[node1][node2])
 
-	#Apparently SN100 is the dolphin to start at		
-	print("Effective Eccenctricity: ", max(longestPaths)) #Change this to MIN depending on what Dr.Leopold emails back
+	#Sort in descending order
+	paths.sort(reverse=True)
+	
+	#Keep top 90% highest values
+	paths = paths[:math.floor(len(paths)*.9)]
+	
+	#Average of this list (consisting of top 90% of shortest path values)
+	print("Effective Eccenctricity: ", sum(paths)/len(paths))
 	
 	
 def Density(g):
@@ -146,9 +146,9 @@ ClusterCoeff(DolphinGraph)
 Transitivity(DolphinGraph)
 
 #9 Drivers
-EigenvectorCentrality(DolphinGraph)
-BetweennessCentrality(DolphinGraph)
-ClosenessCentrality(DolphinGraph)
+#EigenvectorCentrality(DolphinGraph)
+#BetweennessCentrality(DolphinGraph)
+#ClosenessCentrality(DolphinGraph)
 
 
 #drawGraph(DolphinGraph)
