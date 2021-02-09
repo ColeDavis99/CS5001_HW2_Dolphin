@@ -106,19 +106,33 @@ def Transitivity(g):
 	
 def EigenvectorCentrality(g):
 	EC = nx.eigenvector_centrality(g)
+	node_color = [5000 * g.degree(v) for v in g]
+	node_size = [v * 6000 for v in EC.values()]
+	
+	plt.figure(figsize=(20,20))
+	nx.draw_networkx(g, with_labels=True, node_color=node_color, node_size=node_size, font_size=9, font_color="black")
+	plt.axis('off')
+	plt.show()
 
 def BetweennessCentrality(g):
 	BC = nx.betweenness_centrality(g, normalized=True)
 	node_color = [5000 * g.degree(v) for v in g]
 	node_size = [v * 10000 for v in BC.values()]
 	
-	plt.figure(figsize=(40,40))
-	nx.draw_networkx(g, with_labels=False, node_color=node_color, node_size=node_size)
+	plt.figure(figsize=(20,20))
+	nx.draw_networkx(g, with_labels=True, node_color=node_color, node_size=node_size, font_size=9, font_color="black")
 	plt.axis('off')
 	plt.show()
 
 def ClosenessCentrality(g):
-	CC = nx.closeness_centrality(g, normalized=True)
+	CC = nx.closeness_centrality(g)
+	node_color = [5000 * g.degree(v) for v in g]
+	node_size = [v * 3500 for v in CC.values()]
+	
+	plt.figure(figsize=(20,20))
+	nx.draw_networkx(g, with_labels=True, node_color=node_color, node_size=node_size, font_size=9, font_color="black")
+	plt.axis('off')
+	plt.show()
 
 							
 #1-8 drivers
