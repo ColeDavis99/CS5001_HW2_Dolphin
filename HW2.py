@@ -71,18 +71,21 @@ def EffectiveEccentricity(g):
 
 	#Sort in descending order
 	paths.sort(reverse=True)
-	
+
+	for i in range(len(paths)):
+		if(paths[i] == 1):
+			ctr = ctr+1
+
 	#Keep top 90% highest values
 	paths = paths[:math.floor(len(paths)*.9)]
-	
+
 	#Average of this list (consisting of top 90% of shortest path values)
 	print("Effective Eccenctricity: ", sum(paths)/len(paths))
 	
 	
 def Density(g):
 	print("\n=============== #6 ===============")
-	N = (len(list(g.nodes)) * len(list(g.nodes))) / 2
-	print("Density: ", len(list(g.edges))/N)
+	print("Density: ", nx.density(g))
 	
 
 def ClusterCoeff(g):
@@ -103,6 +106,15 @@ def Transitivity(g):
 	print("Transitivity: ", nx.transitivity(g))
 	
 	
+def BetweennessCentrality(g):
+	BC = nx.betweenness_centrality(g, normalized=True)
+	node_color = [5000 * g.degree(v) for v in g]
+	node_size = [v * 10000 for v in BC.values()]
+	
+	plt.figure(figsize=(20,20))
+	nx.draw_networkx(g, with_labels=True, node_color=node_color, node_size=node_size, font_size=9, font_color="black")
+	plt.axis('off')
+	plt.show()
 	
 def EigenvectorCentrality(g):
 	EC = nx.eigenvector_centrality(g)
@@ -114,15 +126,6 @@ def EigenvectorCentrality(g):
 	plt.axis('off')
 	plt.show()
 
-def BetweennessCentrality(g):
-	BC = nx.betweenness_centrality(g, normalized=True)
-	node_color = [5000 * g.degree(v) for v in g]
-	node_size = [v * 10000 for v in BC.values()]
-	
-	plt.figure(figsize=(20,20))
-	nx.draw_networkx(g, with_labels=True, node_color=node_color, node_size=node_size, font_size=9, font_color="black")
-	plt.axis('off')
-	plt.show()
 
 def ClosenessCentrality(g):
 	CC = nx.closeness_centrality(g)
@@ -146,10 +149,9 @@ ClusterCoeff(DolphinGraph)
 Transitivity(DolphinGraph)
 
 #9 Drivers
-#EigenvectorCentrality(DolphinGraph)
-#BetweennessCentrality(DolphinGraph)
-#ClosenessCentrality(DolphinGraph)
-
+BetweennessCentrality(DolphinGraph)
+EigenvectorCentrality(DolphinGraph)
+ClosenessCentrality(DolphinGraph)
 
 #drawGraph(DolphinGraph)
 
