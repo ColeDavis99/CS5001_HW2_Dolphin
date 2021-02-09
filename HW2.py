@@ -105,16 +105,23 @@ def Transitivity(g):
 	
 	
 def EigenvectorCentrality(g):
-	print(nx.eigenvector_centrality(g))
+	EC = nx.eigenvector_centrality(g)
 
 def BetweennessCentrality(g):
-	print(nx.betweenness_centrality(g, normalized=True)
+	BC = nx.betweenness_centrality(g, normalized=True)
+	node_color = [5000 * g.degree(v) for v in g]
+	node_size = [v * 10000 for v in BC.values()]
+	
+	plt.figure(figsize=(40,40))
+	nx.draw_networkx(g, with_labels=False, node_color=node_color, node_size=node_size)
+	plt.axis('off')
+	plt.show()
 
 def ClosenessCentrality(g):
-	print(nx.closeness_centrality(g, normalized=True))
+	CC = nx.closeness_centrality(g, normalized=True)
 
 							
-#Driver
+#1-8 drivers
 DegreeOutput(DolphinGraph)
 CharacteristicPathLength(DolphinGraph)
 Diameter(DolphinGraph)
@@ -124,12 +131,13 @@ Density(DolphinGraph)
 ClusterCoeff(DolphinGraph)
 Transitivity(DolphinGraph)
 
+#9 Drivers
 EigenvectorCentrality(DolphinGraph)
 BetweennessCentrality(DolphinGraph)
 ClosenessCentrality(DolphinGraph)
 
 
-drawGraph(DolphinGraph)
+#drawGraph(DolphinGraph)
 
 
 
