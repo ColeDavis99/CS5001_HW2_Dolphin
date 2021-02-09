@@ -53,7 +53,7 @@ def CenterAndPeripheral(g):
 	
 def EffectiveEccentricity(g):
 	print("\n=============== #5 ===============")
-	#What is the shortest path length that reaches 90% of all dolphins, from the optimal starting node?
+	#What is the shortest path length that reaches 90% of all dolphins?
 	totalDolphins = len(list(g.nodes))
 	dolphinsToKeep = math.floor(totalDolphins * 0.9)
 
