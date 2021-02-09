@@ -1,0 +1,4 @@
+Does this network exhibit a small-world effect?
+-yes if diameter is small, if effective eccentricity is small, if characteristic path length is small.
+
+Is this network strongly cohesive?

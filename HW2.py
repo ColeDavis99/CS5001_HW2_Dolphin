@@ -76,7 +76,7 @@ def EffectiveEccentricity(g):
 	
 
 	#Apparently SN100 is the dolphin to start at		
-	print("Effective Eccenctricity: ", max(longestPaths))
+	print("Effective Eccenctricity: ", max(longestPaths)) #Change this to MIN depending on what Dr.Leopold emails back
 	
 	
 def Density(g):
@@ -84,7 +84,36 @@ def Density(g):
 	N = (len(list(g.nodes)) * len(list(g.nodes))) / 2
 	print("Density: ", len(list(g.edges))/N)
 	
+
+def ClusterCoeff(g):
+	'''A graph is small-worldif C is significantly higher than it would be for a random graph constructed on the same vertex set with approximately the same diameter'''
+	c = nx.clustering(g)
 	
+	# compute overall coefficient
+	sum = 0
+	for x in c:
+		sum = sum + c[x]
+		
+	print("\n=============== #7 ===============")
+	print("Cluster Coefficient: ", sum/g.number_of_nodes())
+	
+	
+def Transitivity(g):
+	print("\n=============== #8 ===============")
+	print("Transitivity: ", nx.transitivity(g))
+	
+	
+	
+def EigenvectorCentrality(g):
+	print(nx.eigenvector_centrality(g))
+
+def BetweennessCentrality(g):
+	print(nx.betweenness_centrality(g, normalized=True)
+
+def ClosenessCentrality(g):
+	print(nx.closeness_centrality(g, normalized=True))
+
+							
 #Driver
 DegreeOutput(DolphinGraph)
 CharacteristicPathLength(DolphinGraph)
@@ -92,6 +121,13 @@ Diameter(DolphinGraph)
 CenterAndPeripheral(DolphinGraph)
 EffectiveEccentricity(DolphinGraph)
 Density(DolphinGraph)
+ClusterCoeff(DolphinGraph)
+Transitivity(DolphinGraph)
+
+EigenvectorCentrality(DolphinGraph)
+BetweennessCentrality(DolphinGraph)
+ClosenessCentrality(DolphinGraph)
+
 
 drawGraph(DolphinGraph)
 
